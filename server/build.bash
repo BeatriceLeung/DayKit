@@ -1,0 +1,3 @@
+source venv/bin/activate
+export API_KEY="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"
+python -u "/home/tejasviaynor/DayKit/server/app.py"

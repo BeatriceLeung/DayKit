@@ -22,7 +22,8 @@ def hello_world():
         {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": "Recommend me an outfit for " + str(cur_temp) + "degrees Farenheit weather."
+            "content": "Recommend me an outfit for " + str(cur_temp) + "degrees Farenheit weather. There's as min of " + str(min_temp) + 
+            " and a max of " + str(max_temp) + " and I want an outfit that will work for the whole day."
         }
         ],
         temperature=0.7 #controls randomness

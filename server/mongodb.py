@@ -52,5 +52,11 @@ addClothing("boots 1", "boots", "me")
 addClothing("longcotton 1", "longcotton", "me")
 addClothing("lightjacket 1", "lightjacket", "me")
 addClothing("sweater 1", "sweater", "me")
-
-# no blouses or anything after 
+addClothing("blouse 1", "blouse", "me")
+addClothing("dress 1", "dress", "me")
+addClothing("shortcotton 1", "shortcotton", "me")
+addClothing("shortsleeves 1", "shortsleeves", "me")
+addClothing("shorts 1", "shorts", "me")
+addClothing("sandals 1", "sandals", "me")
+addClothing("skirt 1", "skirt", "me")
+addClothing("tank 1", "tank", "me")

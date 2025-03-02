@@ -35,6 +35,13 @@ def getRecommendation():
     return "<p>" + str(temp) +"</p>"
     # pickOutfit()
 
+@app.route("/getkit")
+def getKit():
+    myOutfit = Outfit.pickOutfit()
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5002)

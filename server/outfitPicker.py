@@ -3,8 +3,6 @@ import mongodb as db
 import random
 
 
-
-
 def getRandomItem(items):
     if len(items) > 0:
         return random.sample(items, 1)

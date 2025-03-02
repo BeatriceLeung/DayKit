@@ -1,21 +1,62 @@
-from openmeteopy import OpenMeteo
-from openmeteopy.options import EcmwfOptions
-from openmeteopy.hourly import HourlyEcmwf
-from openmeteopy.utils.constants import *
+# # https://github.com/m0rp43us/openmeteopy/blob/main/readme/ECMWF.md
 
-# Latitude, Longitude
-longitude = 34.07
-latitude =  -118
+# from openmeteopy import OpenMeteo
+# from openmeteopy.options import EcmwfOptions
+# from openmeteopy.hourly import HourlyEcmwf
+# from openmeteopy.utils.constants import *
 
-hourly = HourlyEcmwf()
-# Here we want to see the data of past days too,notice how the timezone parameter is non existent for these api options
-options =  EcmwfOptions(latitude,
-                        longitude,
-                        past_days=2)
+# # Latitude, Longitude
+# longitude = 34.07
+# latitude =  -118
 
-mgr = OpenMeteo(options, hourly.all())
+# hourly = HourlyEcmwf()
+# # Here we want to see the data of past days too,notice how the timezone parameter is non existent for these api options
+# options =  EcmwfOptions(latitude,
+#                         longitude,
+#                         past_days=2)
 
-# Download data in json format
-meteo = mgr.get_json_str()
+# mgr = OpenMeteo(options, hourly.all())
 
-print(meteo)
+# # Download data in json format
+# meteo = mgr.get_json_str()
+
+# print(meteo)
+
+import openmeteo_requests
+import requests_cache
+import pandas as pd
+from retry_requests import retry
+
+# Setup the Open-Meteo API client with cache and retry on error
+cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
+retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
+openmeteo = openmeteo_requests.Client(session = retry_session)
+
+# Make sure all required weather variables are listed here
+# The order of variables in hourly or daily is important to assign them correctly below
+url = "https://api.open-meteo.com/v1/forecast"
+params = {
+	"latitude": 34.0522,
+	"longitude": -118.2437,
+	"current": "temperature_2m",
+	"timezone": "America/Los_Angeles",
+	"forecast_days": 1
+}
+responses = openmeteo.weather_api(url, params=params)
+
+# Process first location. Add a for-loop for multiple locations or weather models
+response = responses[0]
+print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
+print(f"Elevation {response.Elevation()} m asl")
+print(f"Timezone {response.Timezone()} {response.TimezoneAbbreviation()}")
+print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
+
+
+# Current values. The order of variables needs to be the same as requested.
+current = response.Current()
+
+current_temperature_2m = current.Variables(0).Value()
+
+print(f"Current time {current.Time()}")
+
+print(f"Current temperature_2m {current_temperature_2m}")

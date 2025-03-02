@@ -3,6 +3,7 @@ from openai import OpenAI
 import os
 # from flask_cors import CORS
 import weather_url as WeatherAPI
+import outfitPicker as Outfit
 
 app = Flask(__name__)
 # CORS(app, supports_credentials=True)
@@ -29,6 +30,8 @@ def hello_world():
         temperature=0.7 #controls randomness
     )
     return "<p>" + completion.choices[0].message.content + "</p> <p>" + str(temp) + "</p>"
+    
+    # pickOutfit()
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5002)

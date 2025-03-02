@@ -1,8 +1,14 @@
 import weather_url as WeatherAPI
 import mongodb as db
+import random
+
+
+
 
 def getRandomItem(items):
-    if(len(items) > 0) return random.sample(items, 1)
+    if len(items) > 0:
+        return random.sample(items, 1)
+    return []
 
 def pickOutfit():
     user="me" # default user
@@ -23,7 +29,6 @@ def pickOutfit():
     sneakers = db.getClothes("sneakers", user)
     boots = db.getClothes("boots", user)
     longcotton = db.getClothes("longcotton", user)
-    longcotton = db.getClothes("longcotton", user)
     lightjacket = db.getClothes("lightjacket", user)
     sweater = db.getClothes("sweater", user)
     blouse = db.getClothes("blouse", user)
@@ -33,6 +38,7 @@ def pickOutfit():
     shorts = db.getClothes("shorts", user)
     sandals = db.getClothes("sandals", user)
     skirt = db.getClothes("skirt", user)
+    tank = db.getClothes("tank", user)
 
 
     myOutfit = []
@@ -87,7 +93,7 @@ def pickOutfit():
             myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
             myOutfit += getRandomItem(sneakers+boots)
-    elif(max_temp>=60 and max_temp<80)
+    elif(max_temp>=60 and max_temp<80):
         if(pref == -1):
             myOutfit += getRandomItem(longsleeves+hoodie+sweater)
             if(min_temp<=60):
@@ -139,3 +145,4 @@ def pickOutfit():
     
     return myOutfit
             
+print(pickOutfit())

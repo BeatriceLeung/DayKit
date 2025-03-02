@@ -38,10 +38,19 @@ def addUser(name, password, temp_pref):
 
 
 # Testing
-# initDB()
-# addUser("me", "password")
-# addClothing("shirt 1", "tank", "me")
-# addClothing("shirt 2", "tank", "me")
-# addClothing("shirt 3", "short-sleeve", "me")
+initDB()
+# addUser("me", "password", -1)
+addClothing("longsleeves 1", "longsleeves", "me")
+addClothing("hoodie 1", "hoodie", "me")
+addClothing("jacket 1", "jacket", "me")
+addClothing("leggings 1", "leggings", "me")
+addClothing("pants 1", "pants", "me")
+addClothing("longfuzzy 1", "longfuzzy", "me")
+addClothing("longwool 1", "longwool", "me")
+addClothing("sneakers 1", "sneakers", "me")
+addClothing("boots 1", "boots", "me")
+addClothing("longcotton 1", "longcotton", "me")
+addClothing("lightjacket 1", "lightjacket", "me")
+addClothing("sweater 1", "sweater", "me")
 
-# print(getClothes("tank", "me"))
+# no blouses or anything after 

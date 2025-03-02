@@ -5,7 +5,7 @@ import time
 import os
 
 # Using Mongo DB Atlas
-uri = "mongodb+srv://daykit7:tebnof-mogjEf-kecvu2@hoth.c563n.mongodb.net/?retryWrites=true&w=majority&appName=hoth"
+uri = "mongodb+srv://daykit06:daykit06@hoth.c563n.mongodb.net/?retryWrites=true&w=majority&appName=hoth"
 db = None
 def initDB():
     global db

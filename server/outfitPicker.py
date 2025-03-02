@@ -1,7 +1,8 @@
 import weather_url as WeatherAPI
 
 def getRandomItem(items):
-    if(len(items) > 0) return random.sample(items, 1)
+    if(len(items) > 0):
+        return random.sample(items, 1)
 
 def pickOutfit():
     temp = WeatherAPI.getTemperature()
@@ -62,7 +63,7 @@ def pickOutfit():
             myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
             myOutfit += getRandomItem(sneakers+boots)
-    elif(max_temp>=60 and max_temp<80)
+    elif(max_temp>=60 and max_temp<80):
         if(pref == -1):
             myOutfit += getRandomItem(longsleeves+hoodie+sweater)
             if(min_temp<=60):

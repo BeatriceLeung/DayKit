@@ -3,6 +3,7 @@ from openai import OpenAI
 import os
 # from flask_cors import CORS
 import weather_url as WeatherAPI
+import outfitPicker as Outfit
 
 app = Flask(__name__)
 # CORS(app, supports_credentials=True)
@@ -32,7 +33,7 @@ def getRecommendation():
     return "<p>" + completion.choices[0].message.content + "</p> <p>" + str(temp) + "</p>"
     '''
     return "<p>" + str(temp) +"</p>"
-
+    # pickOutfit()
 
 
 if __name__ == '__main__':

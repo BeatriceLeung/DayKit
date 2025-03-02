@@ -1,6 +1,9 @@
 import weather_url as WeatherAPI
 import mongodb as db
 
+def getRandomItem(items):
+    if(len(items) > 0) return random.sample(items, 1)
+
 def pickOutfit():
     user="me" # default user
     temp = WeatherAPI.getTemperature()
@@ -35,94 +38,101 @@ def pickOutfit():
     myOutfit = []
     if(max_temp < 40):
         if(pref == -1):
-            myOutfit += random.sample(longsleeves, 1)
-            myOutfit += random.sample(hoodie, 1)
-            myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(leggings, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longfuzzy + longwool, 1)
+            myOutfit += getRandomItem(longsleeves)
+            myOutfit += getRandomItem(hoodie)
+            myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(leggings)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longfuzzy + longwool)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
         elif(pref == 0):
-            myOutfit += random.sample(longsleeves, 1)
-            myOutfit += random.sample(hoodie, 1)
-            myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longcotton, 1)
+            myOutfit += getRandomItem(longsleeves)
+            myOutfit += getRandomItem(hoodie)
+            myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
         else:
-            myOutfit += random.sample(longsleeves, 1)
-            myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longcotton, 1)
+            myOutfit += getRandomItem(longsleeves)
+            myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
     elif(max_temp>=40 and max_temp<60):
         if(pref == -1):
-            myOutfit += random.sample(longsleeves, 1)
-            myOutfit += random.sample(lightjacket, 1)
-            if(min_temp<=40) myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longfuzzy + longwool, 1)
+            myOutfit += getRandomItem(longsleeves)
+            myOutfit += getRandomItem(lightjacket)
+            if(min_temp<=40):
+                myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longfuzzy + longwool)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
         elif(pref == 0):
-            myOutfit += random.sample(longsleeves, 1)
-            if(min_temp<=40) myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longcotton, 1)
+            myOutfit += getRandomItem(longsleeves)
+            if(min_temp<=40):
+                myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
         else:
-            myOutfit += random.sample(longsleeves, 1)
-            if(min_temp<=40) myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(leggings+pants, 1)
-            myOutfit += random.sample(longcotton, 1)
+            myOutfit += getRandomItem(longsleeves)
+            if(min_temp<=40):
+                myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(leggings+pants)
+            myOutfit += getRandomItem(longcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
     elif(max_temp>=60 and max_temp<80)
         if(pref == -1):
-            myOutfit += random.sample(longsleeves+hoodie+sweater, 1)
-            if(min_temp<=60) myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants, 1)
-            myOutfit += random.sample(longfuzzy + longcotton, 1)
+            myOutfit += getRandomItem(longsleeves+hoodie+sweater)
+            if(min_temp<=60):
+                myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants)
+            myOutfit += getRandomItem(longfuzzy + longcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+boots, 1)
+            myOutfit += getRandomItem(sneakers+boots)
         elif(pref == 0):
-            myOutfit += random.sample(longsleeves+blouse+dress, 1)
-            if(min_temp<=60) myOutfit += random.sample(jacket, 1)
-            myOutfit += random.sample(pants+leggings, 1)
-            myOutfit += random.sample(shortcotton, 1)
+            myOutfit += getRandomItem(longsleeves+blouse+dress)
+            if(min_temp<=60):
+                myOutfit += getRandomItem(jacket)
+            myOutfit += getRandomItem(pants+leggings)
+            myOutfit += getRandomItem(shortcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers, 1)
+            myOutfit += getRandomItem(sneakers)
         else:
-            myOutfit += random.sample(shortsleeves+blouse+dress, 1)
-            if(min_temp<=60) myOutfit += random.sample(lightjacket, 1)
-            myOutfit += random.sample(leggings+pants+shorts, 1)
-            myOutfit += random.sample(shortcotton, 1)
+            myOutfit += getRandomItem(shortsleeves+blouse+dress)
+            if(min_temp<=60):
+                myOutfit += getRandomItem(lightjacket)
+            myOutfit += getRandomItem(leggings+pants+shorts)
+            myOutfit += getRandomItem(shortcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+sandals, 1)
+            myOutfit += getRandomItem(sneakers+sandals)
     else:
         if(pref == -1):
-            myOutfit += random.sample(shortsleeves+blouse+dress, 1)
-            if(min_temp<=80) myOutfit += random.sample(lightjacket, 1)
-            myOutfit += random.sample(pants+leggings, 1)
-            myOutfit += random.sample(shortcotton, 1)
+            myOutfit += getRandomItem(shortsleeves+blouse+dress)
+            if(min_temp<=80):
+                myOutfit += getRandomItem(lightjacket)
+            myOutfit += getRandomItem(pants+leggings)
+            myOutfit += getRandomItem(shortcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers, 1)
+            myOutfit += getRandomItem(sneakers)
         elif(pref == 0):
-            myOutfit += random.sample(shortsleeves+blouse+dress, 1)
-            myOutfit += random.sample(pants+skirt+shorts, 1)
-            myOutfit += random.sample(shortcotton, 1)
+            myOutfit += getRandomItem(shortsleeves+blouse+dress)
+            myOutfit += getRandomItem(pants+skirt+shorts)
+            myOutfit += getRandomItem(shortcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers, 1)
+            myOutfit += getRandomItem(sneakers)
         else:
-            myOutfit += random.sample(tank+shortsleeves+blouse+dress, 1)
-            myOutfit += random.sample(shorts+skirt, 1)
-            myOutfit += random.sample(shortcotton, 1)
+            myOutfit += getRandomItem(tank+shortsleeves+blouse+dress)
+            myOutfit += getRandomItem(shorts+skirt)
+            myOutfit += getRandomItem(shortcotton)
             #take precipitation into account later
-            myOutfit += random.sample(sneakers+sandals, 1)
+            myOutfit += getRandomItem(sneakers+sandals)
 
     for item in myOutfit:
         print(item) 

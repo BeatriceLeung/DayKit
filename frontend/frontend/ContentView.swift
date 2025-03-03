@@ -1,68 +1,48 @@
-//
-//  ContentView.swift
-//  frontend
-//
-//  Created by June Qin on 3/2/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var items: [Any] = []
-    /*
+    @State private var items: [String] = []
+
+    init() {
+        // The initialization logic can be handled within the body or onAppear
+    }
+
+    var body: some View {
+        VStack {
+            ForEach(items, id: \.self) { clothing in
+                Text(clothing)
+            }
+        }
+        .padding()
+        .onAppear {
+            fetchData()  // Fetch data when the view appears
+        }
+    }
+
     func fetchData() {
-        guard let url = URL(string: "https://8ea0-2607-f010-2a7-16-a5a8-8b50-d8c6-e854.ngrok-free.app/getkit") else {return}
-        
-        URLSession.shared.dataTask(with: url) {
-            data, response, error in
+        let url = URL(string: "https://1a14-2607-f010-2a7-16-a5a8-8b50-d8c6-e854.ngrok-free.app/getkit")
+
+        URLSession.shared.dataTask(with: url!) { data, response, error in
             if let error = error {
                 print(error)
                 return
             }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            do {
-                let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [Any]
-                print(jsonArray)
-            
-            } catch {
-                print(error)
+
+            if let data = data {
+                do {
+                    // Parse the JSON response and update the state variable
+                    let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [String]
+                    DispatchQueue.main.async {
+                        items = jsonArray ?? []  // Update the state variable on the main thread
+                    }
+                } catch {
+                    print(error)
+                }
             }
         }.resume()
-        
-    }
-    
-    var body: some View {
-        VStack {
-            if items.isEmpty {
-                Text("fetching data")
-            } else {
-                Text("data fetching successful")
-            }
-        }.onAppear{
-            fetchData()
-        }
-    } */
-
-    
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-            
-        }
-        .padding()
     }
 }
 
-/*
 #Preview {
     ContentView()
-} */
+}

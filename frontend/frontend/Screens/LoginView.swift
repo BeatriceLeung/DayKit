@@ -115,6 +115,7 @@ struct LoginView: View {
                     .frame(width: 300, height: 600)
                     .background(Color(red: 0.27, green: 0.76, blue: 0.89))
                 
+                Image("dayKit icon")
             }
             .frame(width: 300, height: 600)
             .background(.white)

@@ -91,6 +91,7 @@ struct SignupView: View {
                     .foregroundColor(.clear)
                     .frame(width: 300, height: 500)
                     .background(Color(red: 0.27, green: 0.76, blue: 0.89))
+                    
                 
             }
             .frame(width: 300, height: 600)

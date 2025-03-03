@@ -38,6 +38,8 @@ def pickOutfit():
     skirt = db.getClothes("skirt", user)
     tank = db.getClothes("tank", user)
 
+    rainboots = db.getClothes("rainboots", user)
+
 
     myOutfit = []
     if(max_temp < 40):

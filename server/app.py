@@ -7,40 +7,21 @@ import outfitPicker as Outfit
 
 app = Flask(__name__)
 # CORS(app, supports_credentials=True)
-client = OpenAI(api_key=os.environ.get('API_KEY'))
-
 
 @app.route("/")
-def getRecommendation():
+def getHome():
     temp = WeatherAPI.getTemperature()
     min_temp = temp["min"]
     max_temp = temp["max"]
     cur_temp = temp["current"]
 
-    '''
-    completion = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {
-            "role": "user",
-            "content": "Recommend me an outfit for " + str(cur_temp) + "degrees Farenheit weather. There's as min of " + str(min_temp) + 
-            " and a max of " + str(max_temp) + " and I want an outfit that will work for the whole day."
-        }
-        ],
-        temperature=0.7 #controls randomness
-    )
-    return "<p>" + completion.choices[0].message.content + "</p> <p>" + str(temp) + "</p>"
-    '''
     return "<p>" + str(temp) +"</p>"
-    # pickOutfit()
 
-@app.route("/getkit")
+@app.route("/getkit", methods=["GET"])
 def getKit():
     myOutfit = Outfit.pickOutfit()
-
-
-
+    # return jsonify(myOutfit)
+    return myOutfit
 
 
 if __name__ == '__main__':

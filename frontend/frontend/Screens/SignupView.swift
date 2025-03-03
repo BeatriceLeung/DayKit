@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  SignupView.swift
 //  frontend
 //
 //  Created by June Qin on 3/2/25.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct SignupView: View {
     let bodyBlue = Color.blue.opacity(0.7)
     @State var username: String = ""
     @State var password: String = ""
     
     var body: some View {
         VStack{
-            Text("get started!")
+            Text("sign up!")
               .font(
                 Font.custom("Nunito", size: 48)
                   .weight(.black)
@@ -24,7 +24,7 @@ struct LoginView: View {
                 Rectangle()
                     .overlay(
                         VStack{
-                            Text("login:")
+                            Text("create account:")
                                 .font(
                                     Font.custom("Nunito", size: 36)
                                         .weight(.black)
@@ -79,40 +79,17 @@ struct LoginView: View {
                                             .weight(.heavy)
                                     )
                                     .foregroundColor(.black)
-                            }
-                            .foregroundColor(.white)
-                            .frame(width: 85, height: 32)
-                            .background(Color(red: 0.85, green: 0.85, blue: 0.85))
-                            .cornerRadius(50)
-                            .padding(.vertical, 20)
-                                
-                            VStack{
-                                Text("no account?")
-                                    .font(
-                                        Font.custom("Nunito", size: 24)
-                                            .weight(.heavy)
-                                    )
-                                    .foregroundColor(.white)
-                                Rectangle()
-                                    .overlay(
-                                        Text("sign up")
-                                            .font(
-                                                Font.custom("Nunito", size: 20)
-                                                    .weight(.heavy)
-                                            )
-                                            .foregroundColor(.black)
-                                    )
-                                    .foregroundColor(.white)
-                                    .frame(width: 85, height: 32)
-                                    .background(Color(red: 0.85, green: 0.85, blue: 0.85))
-                                    .cornerRadius(50)
-                                    .padding(.vertical, 10)
-                            }
-                            .padding(.vertical, 20)
+
+                                }
+                                .foregroundColor(.white)
+                                .frame(width: 85, height: 32)
+                                .background(Color(red: 0.85, green: 0.85, blue: 0.85))
+                                .cornerRadius(50)
+                                .padding(.vertical, 20)
                         }
                     )
                     .foregroundColor(.clear)
-                    .frame(width: 300, height: 600)
+                    .frame(width: 300, height: 500)
                     .background(Color(red: 0.27, green: 0.76, blue: 0.89))
                 
             }
@@ -123,5 +100,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    SignupView()
 }

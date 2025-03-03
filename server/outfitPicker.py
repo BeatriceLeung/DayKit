@@ -7,8 +7,7 @@ def getRandomItem(items):
         return random.sample(items, 1)
     return []
 
-def pickOutfit():
-    user="me" # default user
+def pickOutfit(user="me"):
     temp = WeatherAPI.getTemperature()
     min_temp = temp["min"]
     max_temp = temp["max"]
@@ -37,6 +36,8 @@ def pickOutfit():
     sandals = db.getClothes("sandals", user)
     skirt = db.getClothes("skirt", user)
     tank = db.getClothes("tank", user)
+
+    rainboots = db.getClothes("rainboots", user)
 
 
     myOutfit = []
@@ -179,4 +180,4 @@ def pickOutfit():
     
     return myOutfit
             
-print(pickOutfit())
+# print(pickOutfit())

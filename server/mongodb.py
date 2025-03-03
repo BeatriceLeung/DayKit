@@ -1,7 +1,5 @@
 from pymongo.mongo_client import MongoClient
-# import json
 import time
-
 import os
 
 # Using Mongo DB Atlas
@@ -24,7 +22,7 @@ def getClothes(type, user="me"):
     cursor = db.Clothes.find({"user_name" : user, "type": type})
 
     for clothing in cursor:
-        clothes_array.append(clothing['name'])
+        clothes_array.append(clothing['type'])
     
     return clothes_array
 
@@ -33,24 +31,35 @@ def addClothing(name, type, user_name):
     db.Clothes.insert_one({"name" : name, "user_name" : user_name, "type" : type})
 
 # Add a user
-def addUser(name, password, temp_pref):
-    db.Users.insert_one({"name" : name, "password" : password, "temp_pref" : temp_pref})
+def addUser(name, password, temp_pref, email):
+    db.Users.insert_one({"name" : name, "password" : password, "temp_pref" : temp_pref, "email" : email})
+
+def verifyUser(name, password):
+    return db.Users.find_one({"name" : name})['password'] == password
 
 
-# Testing
+
+# # Testing
 initDB()
 # addUser("me", "password", -1)
-addClothing("longsleeves 1", "longsleeves", "me")
-addClothing("hoodie 1", "hoodie", "me")
-addClothing("jacket 1", "jacket", "me")
-addClothing("leggings 1", "leggings", "me")
-addClothing("pants 1", "pants", "me")
-addClothing("longfuzzy 1", "longfuzzy", "me")
-addClothing("longwool 1", "longwool", "me")
-addClothing("sneakers 1", "sneakers", "me")
-addClothing("boots 1", "boots", "me")
-addClothing("longcotton 1", "longcotton", "me")
-addClothing("lightjacket 1", "lightjacket", "me")
-addClothing("sweater 1", "sweater", "me")
-
-# no blouses or anything after 
+# addClothing("longsleeves", "longsleeves", "me")
+# addClothing("hoodie", "hoodie", "me")
+# addClothing("jacket", "jacket", "me")
+# addClothing("leggings", "leggings", "me")
+# addClothing("pants", "pants", "me")
+# addClothing("longfuzzy", "longfuzzy", "me")
+# addClothing("longwool", "longwool", "me")
+# addClothing("sneakers", "sneakers", "me")
+# addClothing("boots", "boots", "me")
+# addClothing("longcotton", "longcotton", "me")
+# addClothing("lightjacket", "lightjacket", "me")
+# addClothing("sweater", "sweater", "me")
+# addClothing("blouse", "blouse", "me")
+# addClothing("dress", "dress", "me")
+# addClothing("shortcotton", "shortcotton", "me")
+# addClothing("shortsleeves", "shortsleeves", "me")
+# addClothing("shorts", "shorts", "me")
+# addClothing("sandals", "sandals", "me")
+# addClothing("skirt", "skirt", "me")
+# addClothing("tank", "tank", "me")
+# addClothing("rainboots", "rainboots", "me")

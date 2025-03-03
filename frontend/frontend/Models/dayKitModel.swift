@@ -29,8 +29,8 @@ class dayKitModel: ObservableObject {
         return loginResponseDTO
     }
     
-    func signUp(name: String, username: String, email: String, password: String) async throws -> signUpResponse {
-        let signUpData = ["name": name, "username": username, "email": email, "password": password]
+    func signUp(username: String, password: String) async throws -> signUpResponse {
+        let signUpData = ["username": username, "password": password]
         let resource = try Resource(
             url: Constants.Urls.signUp!,
             method: .post(JSONEncoder().encode(signUpData)),

@@ -8,9 +8,31 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject private var model: dayKitModel
+    @EnvironmentObject private var appState: AppState
+
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var errorMessage: String = ""
+    
+    private var isFormValid: Bool {
+            !username.isEmpty && !password.isEmpty && (password.count >= 6 && password.count <= 10)
+        }
+        
+        private func logIn() async {
+            do {
+                let response = try await model.login(username: username, password: password)
+                if response.error == true {
+                    errorMessage = response.reason ?? "Login failed"
+                } else {
+                    // appState.routes.append(.OutfitDisplayView)
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+        }
+    
     let bodyBlue = Color.blue.opacity(0.7)
-    @State var username: String = ""
-    @State var password: String = ""
     
     var body: some View {
         VStack{
@@ -72,7 +94,17 @@ struct LoginView: View {
                                   }.padding(4)
                             }
                             .padding(.vertical, 5)
-                            Button(action: {}) {
+                            
+                            if !errorMessage.isEmpty {
+                                        Text(errorMessage)
+                                            .foregroundColor(.red)
+                                            .font(.subheadline)
+                                            .padding(.top, 8)
+                                    }
+                            
+                            Button(action: {Task {
+                                await logIn()
+                            }}) {
                                 Text("submit")
                                     .font(
                                         Font.custom("Nunito", size: 20)
@@ -123,5 +155,9 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    NavigationStack {
+        LoginView()
+            .environmentObject(dayKitModel())
+            .environmentObject(AppState())
+    }
 }

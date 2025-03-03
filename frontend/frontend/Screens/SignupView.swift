@@ -9,8 +9,25 @@ import SwiftUI
 
 struct SignupView: View {
     let bodyBlue = Color.blue.opacity(0.7)
-    @State var username: String = ""
-    @State var password: String = ""
+    @EnvironmentObject private var model: dayKitModel
+    @EnvironmentObject private var appState: AppState
+    
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var errorMessage: String = ""
+
+    
+    private var isFormValid: Bool {
+        !username.isEmpty && !password.isEmpty && (password.count >= 6 && password.count <= 10)
+    }
+    private func signUp() async {
+        do {
+            try await model.signUp(username: username, password: password)
+            appState.routes.append(.login)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
     
     var body: some View {
         VStack{
@@ -72,7 +89,19 @@ struct SignupView: View {
                                   }.padding(4)
                             }
                             .padding(.vertical, 5)
-                            Button(action: {}) {
+                            
+                            if !errorMessage.isEmpty {
+                                            Text(errorMessage)
+                                                .foregroundColor(.red)
+                                                .font(.subheadline)
+                                                .padding(.top, 8)
+                                        }
+                            
+                            Button(action: {
+                                Task {
+                                    await signUp()
+                                }
+                            }) {
                                 Text("submit")
                                     .font(
                                         Font.custom("Nunito", size: 20)

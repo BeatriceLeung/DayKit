@@ -23,6 +23,36 @@ def getKit():
     # return jsonify(myOutfit)
     return myOutfit
 
+@app.route("/login", methods=["POST"])
+def getLogin():
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+    if(not db.verifyUser(username, password)):
+        return jsonify({"error": "Invalid login attempt"}), 401
+    else:
+        return ""
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+    temp_pref = data.get('temperature_preference')
+    email = data.get('email')
+
+    db.addUser(username, password, temp_pref, email)
+    return ""
+
+@app.route("/wardrobe", methods=["POST"])
+def expandWardrobe():
+    data = request.json
+    name = data.get('name')
+    category = data.get('category')
+    username = data.get('username')
+
+    db.addClothing(name, category, username)
+    return ""
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5002)

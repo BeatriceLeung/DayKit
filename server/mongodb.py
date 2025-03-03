@@ -33,8 +33,8 @@ def addClothing(name, type, user_name):
     db.Clothes.insert_one({"name" : name, "user_name" : user_name, "type" : type})
 
 # Add a user
-def addUser(name, password, temp_pref):
-    db.Users.insert_one({"name" : name, "password" : password, "temp_pref" : temp_pref})
+def addUser(name, password, temp_pref, email):
+    db.Users.insert_one({"name" : name, "password" : password, "temp_pref" : temp_pref, "email" : email})
 
 def verifyUser(name, password):
     return db.Users.find_one({"name" : name})['password'] == password

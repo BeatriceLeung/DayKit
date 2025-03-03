@@ -36,6 +36,10 @@ def addClothing(name, type, user_name):
 def addUser(name, password, temp_pref):
     db.Users.insert_one({"name" : name, "password" : password, "temp_pref" : temp_pref})
 
+def verifyUser(name, password):
+    return db.Users.find_one({"name" : name})['password'] == password
+
+
 
 # Testing
 initDB()

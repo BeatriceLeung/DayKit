@@ -20,12 +20,15 @@ def getHome():
 
 # For hackathon purposes: routes will just return success if error thrown
 # Ideally fix the Swift front end to send paramters/form data in the request
+
+# Get recommended clothes based on weather and current wardrobe
 @app.route("/getkit", methods=["GET"])
 def getKit():
     # username = request.args.get('username')
     myOutfit = Outfit.pickOutfit()
     return myOutfit
 
+# Verify login
 @app.route("/login", methods=["POST"])
 def getLogin():
     try:
@@ -40,7 +43,7 @@ def getLogin():
         print(e)
     return ""
 
-
+# Create account
 @app.route("/signup", methods=["POST"])
 def signup():
     try:
@@ -56,6 +59,7 @@ def signup():
         print(e)
     return ""
 
+# Add clothing item
 @app.route("/wardrobe", methods=["POST"])
 def expandWardrobe():
     try:

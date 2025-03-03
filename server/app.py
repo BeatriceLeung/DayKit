@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from openai import OpenAI
 import os
 # from flask_cors import CORS
 import weather_url as WeatherAPI
 import outfitPicker as Outfit
+import mongodb as db
 
 app = Flask(__name__)
 # CORS(app, supports_credentials=True)
@@ -20,7 +21,6 @@ def getHome():
 @app.route("/getkit", methods=["GET"])
 def getKit():
     myOutfit = Outfit.pickOutfit()
-    # return jsonify(myOutfit)
     return myOutfit
 
 @app.route("/login", methods=["POST"])
